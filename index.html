@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang=pt-br>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Bora Codar - Calculadora - 05</title>
+</head>
+<body>
+    <div id="calculator">
+        <div id="display">
+            <div id="last-calc"></div>
+            <div id="result">
+                <img src="./assets/equals.svg" alt="Símbolo de igual">
+                <span id="final">0</span>
+            </div>
+        </div>
+        <div id="keyboard">
+            <button  onclick="back()" class="secondary">CE</button>
+            <button onclick="clean()">C</button>
+            <button onclick="percentage()">%</button>
+            <button onclick="insert('/')" class="tertiary">
+                <img src="./assets/divide.svg" alt="Divide">
+            </button>
+            <button onclick="insert('7')">7</button>
+            <button onclick="insert('8')">8</button>
+            <button onclick="insert('9')">9</button>
+            <button onclick="insert('*')" class="tertiary">
+                <img src="./assets/x.svg" alt="X">
+            </button>
+            <button onclick="insert('4')"> 4</button>
+            <button onclick="insert('5')">5</button>
+            <button onclick="insert('6')">6</button>
+            <button onclick="insert('-')" class="tertiary">
+                <img src="./assets/minus.svg" alt="Sinal de menos">
+            </button>
+            <button onclick="insert('1')">1</button>
+            <button onclick="insert('2')">2</button>
+            <button onclick="insert('3')">3</button>
+            <button onclick="insert('+')" class="tertiary">
+                <img src="./assets/plus.svg" alt="Sinal de mais">
+            </button>
+            <button onclick="plusminus()">
+                <img src="./assets/plusminus.svg" alt="Mais e Menos">
+            </button>
+            <button onclick="insert('0')">0</button>
+            <button onclick="insert('.')">,</button>
+            <button onclick="cal()" class="quartiary">
+                <img src="assets/result.svg" alt="Sinal de igual">
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function insert (num) {
+            let number = document.getElementById('last-calc').innerHTML;
+            document.getElementById('last-calc').innerHTML = number + num;
+        }
+        function clean () {
+            document.getElementById('last-calc').innerHTML = ""
+            document.getElementById('final').innerHTML = "0"
+        }
+        function back () {
+            let result = document.getElementById('last-calc').innerHTML;
+            document.getElementById('last-calc').innerHTML = result.substring(0, result.length-1)
+        }
+        function cal () {
+            let result = document.getElementById('last-calc').innerHTML;
+            if(result){
+                document.getElementById('final').innerHTML = eval(result)
+            }
+            else {
+                document.getElementById('last-calc').innerHTML = 'Insira Algo'
+            }
+        }
+        function percentage () {
+            let number = document.getElementById('last-calc').innerHTML;
+            let result = number/100
+            document.getElementById('final').innerHTML = eval(result)
+        }
+        function plusminus () {
+            let result = document.getElementById('final').innerHTML;
+            if(result.match('-')) {
+                document.getElementById('final').innerHTML = result.replace("-", "+")
+            }else {
+                if ((!isNaN(result))) {
+                    document.getElementById('final').innerHTML = '-' + result
+
+                } else {
+                    document.getElementById('final').innerHTML = result.replace("+", "-")
+                }
+            }
+        }
+    </script>
+</body>
+</html>
